@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: #fff;
+    font-family: 'Popins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    max-width: 400px;
+    border-radius: 20px;
+
+}
+.card{
+    border-radius: 20px;
+    height: 600px;
+    background-image: linear-gradient(to right, #0084ff, red);
+    border: none;
+    overflow: hidden;
+    box-shadow: 0 5px 8px #414141;
+    z-index: 0;
+    box-sizing: border-box;
+}
+
+.circle{
+    position: absolute;
+    bottom: -230px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    clip-path: circle(50%);
+    height: 700px;
+    width: 700px;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.myHed{
+    margin-top: 40px;
+    font-size: 32px;
+    margin-bottom: 50px;
+    font-weight: 700;
+    background-image: linear-gradient(to right, purple, red);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+.user img{
+    width: 50%;
+    height: 50%;
+    justify-content: center;
+}
+.myHed .fa-user{
+    font-size: 40px;
+}
+.fas{
+    position: relative;
+    display: block;
+    left: -87px;
+    top: 30px;
+    color: rgb(255,255,255);
+}
+
+.send{
+    position: relative;
+    display: block;
+    left: -40px;
+    top: 27px;
+    color: rgb(255,255,255);
+}
+
+.button{
+    width: 230px;
+    border-radius: 25px;
+    background-image: linear-gradient(to right, red, purple);
+    color: #fff;
+    font-weight: 700px;
+    cursor: pointer;
+}
+.button:focus{
+    border: none;
+    outline: none;
+    color: #fff;
+}
+.invalid-feedback{
+    display: block !important;
+        /* display: none; */
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: red;
+    text-align: center;
+    justify-content: center;
+}
+.myInput{
+    width: 220px;
+    padding: 10px;
+    padding-left: 40px;
+    border-radius: 25px;
+    background-image: linear-gradient(to right, red, purple);
+    color: #fff;
+    border:none;
+    display: block;
+}
+
+.myInput::placeholder{
+    color: #fff;
+    opacity: .6;
+}
+.myInput:focus{
+    border: none;
+    outline: none;
+    color: #fff !important;
+}
+
+.check_1{
+    font-weight: 500;
+    color: red !important;
+    font-size: 15px;
+    margin: 15px auto;
+    cursor: pointer;
+}
+
+@media (max-width: 500px){
+    .container{
+        max-width: 100%;
+    }
+}
