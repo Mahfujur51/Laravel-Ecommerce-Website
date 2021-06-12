@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Coupon;
@@ -30,7 +30,9 @@ class CouponController extends Controller
                 'created_at'=>Carbon::now()
             ]);
     
-            return Redirect()->back()->with('success', 'Coupon Added Successfully');
+            //return Redirect()->back()->with('success', 'Coupon Added Successfully');
+            Session::flash('success','Coupon Added Successfully!');
+        return redirect()->back();
     
     
         }
@@ -51,27 +53,35 @@ class CouponController extends Controller
             'updated_at'=>Carbon::now()
         ]);
 
-        return Redirect()->route('admin.coupon')->with('Catupdated', 'Coupon Updated Successfully');
+        //return Redirect()->route('admin.coupon')->with('Catupdated', 'Coupon Updated Successfully');
+        Session::flash('success','Coupon Updated Successfully');
+        return redirect()->route('admin.coupon');
     }
 
     //======================Delete Coupon ===========================================
     
     public function Delete($coupon_id){
         $coupon=Coupon::find($coupon_id)->delete();
-        return Redirect()->back()->with('delete', 'Coupon Deleted Successfully');
+        //return Redirect()->back()->with('delete', 'Coupon Deleted Successfully');
+        Session::flash('success','Coupon Deleted Successfully');
+        return redirect()->back();
     }
 
     //======================Inactive Coupon ===========================================
 
     public function Inactive($coupon_id){
         Coupon::find($coupon_id)->update(['status'=>0]);
-        return Redirect()->back()->with('delete', 'Coupon Inactive Successfully');
+        //return Redirect()->back()->with('delete', 'Coupon Inactive Successfully');
+        Session::flash('success','Coupon Inactive Successfully');
+        return redirect()->back();
     }
 
 //======================Active Coupon ===========================================
 
     public function Active($coupon_id){
         Coupon::find($coupon_id)->update(['status'=>1]);
-        return Redirect()->back()->with('Catupdated', 'Coupon Active Successfully');
+        //return Redirect()->back()->with('Catupdated', 'Coupon Active Successfully');
+        Session::flash('success','Coupon Active Successfully');
+        return redirect()->back();
     }
 }

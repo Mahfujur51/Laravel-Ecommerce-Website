@@ -10,26 +10,13 @@
     <div class="sl-pagebody">
       <div class="row row-sm">
         <div class="col-md-8">    
-              <div class="card pd-20 pd-sm-40">
-                <h6 class="card-body-title">Coupon List</h6>    
-                @if(session('Catupdated'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{session('Catupdated')}}</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  @endif
-
-                  @if(session('delete'))
-                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <strong>{{session('delete')}}</strong>
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    @endif
-                <div class="table-wrapper">
+              <div class="card">
+              <div class="card-header bg-primary text-white">
+                <h6 class="card-body-title text-white">Coupon List</h6>
+              </div>
+                 
+                <br>   
+                <div class="table-wrapper  pd-10">
                   <table id="datatable1" class="table display responsive nowrap">
                     <thead>
                       <tr>
@@ -56,7 +43,7 @@
                         </td>
                         <td>
                             <a href="{{ url('admin/coupon/edit/'.$coupon->id) }}" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i> Edit</a>
-                            <a href="{{ url('admin/coupon/delete/'.$coupon->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                            <a href="{{ url('admin/coupon/delete/'.$coupon->id) }}" id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
                             @if($coupon->status == 1)
                             <a href="{{ url('admin/coupon/inactive/'.$coupon->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-arrow-down"></i> Inactive</a>
                             @else
@@ -73,18 +60,10 @@
 
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">Add Coupon
+                <div class="card-header bg-primary text-white">Add Coupon
                 </div>
 
                 <div class="card-body">
-                    @if(session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{session('success')}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      @endif
 
                     <form action="{{ route('store.coupon') }}" method="POST">
                         @csrf

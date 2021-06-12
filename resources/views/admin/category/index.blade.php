@@ -11,24 +11,9 @@
       <div class="row row-sm">
         <div class="col-md-8">    
               <div class="card pd-20 pd-sm-40">
-                <h6 class="card-body-title">Category Table</h6>    
-                @if(session('Catupdated'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{session('Catupdated')}}</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  @endif
-
-                  @if(session('delete'))
-                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <strong>{{session('delete')}}</strong>
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    @endif
+                <div class="card-header bg-primary text-white">
+                <h6 class="card-body-title text-white">Category List</h6>
+              </div>
                 <div class="table-wrapper">
                   <table id="datatable1" class="table display responsive nowrap">
                     <thead>
@@ -56,7 +41,7 @@
                         </td>
                         <td>
                             <a href="{{ url('admin/categories/edit/'.$category->id) }}" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i> Edit</a>
-                            <a href="{{ url('admin/categories/delete/'.$category->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                            <a href="{{ url('admin/categories/delete/'.$category->id) }}" id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
                             @if($category->status == 1)
                             <a href="{{ url('admin/categories/inactive/'.$category->id) }}" class="btn btn-sm btn-danger"><i class="fa fa-arrow-down"></i> Inactive</a>
                             @else
@@ -73,19 +58,10 @@
 
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">Add Category
+                <div class="card-header bg-primary text-white">Add Category
                 </div>
 
                 <div class="card-body">
-                    @if(session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{session('success')}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      @endif
-
                     <form action="{{ route('store.category') }}" method="POST">
                         @csrf
                         <div class="form-group">

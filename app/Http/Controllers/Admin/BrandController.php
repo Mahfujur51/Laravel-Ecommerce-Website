@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Brand;
@@ -30,7 +30,9 @@ class BrandController extends Controller
                 'created_at'=>Carbon::now()
             ]);
     
-            return Redirect()->back()->with('success', 'Brand Added Successfully');
+            //return Redirect()->back()->with('success', 'Brand Added Successfully');
+            Session::flash('success','Brand Added Successfully!');
+        return redirect()->back();
     
     
         }
@@ -51,28 +53,36 @@ class BrandController extends Controller
             'updated_at'=>Carbon::now()
         ]);
 
-        return Redirect()->route('admin.brand')->with('Catupdated', 'Brand Updated Successfully');
+        //return Redirect()->route('admin.brand')->with('Catupdated', 'Brand Updated Successfully');
+        Session::flash('success','Brand Updated Successfully!');
+        return redirect()->route('admin.brand');
     }
 
     //======================Delete Brand ===========================================
     
     public function Delete($brand_id){
         $brand=Brand::find($brand_id)->delete();
-        return Redirect()->back()->with('delete', 'Brand Deleted Successfully');
+        //return Redirect()->back()->with('delete', 'Brand Deleted Successfully');
+        Session::flash('success','Brand Deleted Successfully!');
+        return redirect()->back();
     }
 
     //======================Inactive Brand ===========================================
 
     public function Inactive($brand_id){
         Brand::find($brand_id)->update(['status'=>0]);
-        return Redirect()->back()->with('delete', 'Brand Inactive Successfully');
+        //return Redirect()->back()->with('delete', 'Brand Inactive Successfully');
+        Session::flash('success','Brand Inactive Successfully!');
+        return redirect()->back();
     }
 
 //======================Active Brand ===========================================
 
     public function Active($brand_id){
         Brand::find($brand_id)->update(['status'=>1]);
-        return Redirect()->back()->with('Catupdated', 'Brand Active Successfully');
+        //return Redirect()->back()->with('Catupdated', 'Brand Active Successfully');
+       Session::flash('success','Brand Active Successfully!');
+        return redirect()->back();
     }
 
 }

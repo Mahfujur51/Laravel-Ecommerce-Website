@@ -9,20 +9,14 @@
     </nav>
 
     <div class="sl-pagebody">
-      <div class="row row-sm">
-        <div class="card pd-20 pd-sm-40">
-          <h6 class="card-body-title">Add New Product</h6>
+      <div class="row">
+        <div class="card">
+        <div class="card-header bg-primary text-white" >
+                <h2 class="card-body-title text-white pl-2" style="font-size:15px;">Add New Product</h2>
+              </div>
       <form action="{{ route('store-products')}}" method="POST" enctype="multipart/form-data">
       @csrf
-          <div class="form-layout">
-          @if(session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{session('success')}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      @endif
+          <div class="form-layout  pd-10">
             <div class="row mg-b-25">
               <div class="col-lg-4">
                 <div class="form-group">

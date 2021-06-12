@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Brand;
@@ -78,7 +78,10 @@ class ProductController extends Controller
                 'created_at' => Carbon::now(),
             ]);
 
-            return Redirect()->back()->with('success','Product Added Successfully.');
+            //return Redirect()->back()->with('success','Product Added Successfully.');
+
+            Session::flash('success','Product Added Successfully!');
+            return redirect()->route('manage-products');
             
     
     
@@ -127,7 +130,9 @@ class ProductController extends Controller
                 'updated_at' => Carbon::now(),
             ]);
 
-            return Redirect()->route('manage-products')->with('success','Product Data Updated Successfully.');
+            //return Redirect()->route('manage-products')->with('success','Product Data Updated Successfully.');
+            Session::flash('success','Product Data Updated Successfully!');
+            return redirect()->route('manage-products');
 
         }
 
@@ -207,7 +212,12 @@ class ProductController extends Controller
                 'image_one' => $img_url1,
                 'updated_at' => Carbon::now(),
             ]);
-            return Redirect()->route('manage-products')->with('success','Product Image Updated Successfully.');
+
+            //return Redirect()->route('manage-products')->with('success','Product Image Updated Successfully.');
+
+            Session::flash('success','Product Image Updated Successfully!');
+            return redirect()->route('manage-products');
+
             }
 
             if($request->has('image_two')){
@@ -220,7 +230,12 @@ class ProductController extends Controller
                 'image_two' => $img_url2,
                 'updated_at' => Carbon::now(),
             ]);
-            return Redirect()->route('manage-products')->with('success','Product Image Updated Successfully.');
+
+            //return Redirect()->route('manage-products')->with('success','Product Image Updated Successfully.');
+
+            Session::flash('success','Product Image Updated Successfully!');
+            return redirect()->route('manage-products');
+
             }
             if($request->has('image_three')){
             unlink($old_three);
@@ -232,7 +247,12 @@ class ProductController extends Controller
                 'image_three' => $img_url3,
                 'updated_at' => Carbon::now(),
             ]);
-            return Redirect()->route('manage-products')->with('success','Product Image Updated Successfully.');
+
+            //return Redirect()->route('manage-products')->with('success','Product Image Updated Successfully.');
+
+            Session::flash('success','Product Image Updated Successfully!');
+            return redirect()->route('manage-products');
+
             }
         }
 
@@ -247,20 +267,31 @@ class ProductController extends Controller
 
         Product::findOrFail($product_id)->delete();
 
-        return Redirect()->back()->with('delete', 'Brand Deleted Successfully');
+        //return Redirect()->back()->with('delete', 'Brand Deleted Successfully');
+
+        Session::flash('success','Product Deleted Successfully!');
+            return Redirect()->back();
     }
 
     //======================Inactive Product ===========================================
 
     public function Inactive($product_id){
         Product::find($product_id)->update(['status'=>0]);
-        return Redirect()->back()->with('delete', 'Product Inactive Successfully');
+
+        //return Redirect()->back()->with('delete', 'Product Inactive Successfully');
+
+        Session::flash('success','Product Inactive Successfully!');
+            return Redirect()->back();
     }
 
 //======================Active Product ===========================================
 
     public function Active($product_id){
         Product::find($product_id)->update(['status'=>1]);
-        return Redirect()->back()->with('delete', 'Product Active Successfully');
+
+        //return Redirect()->back()->with('delete', 'Product Active Successfully');
+
+        Session::flash('success','Product Active Successfully!');
+            return Redirect()->back();
     }
 }

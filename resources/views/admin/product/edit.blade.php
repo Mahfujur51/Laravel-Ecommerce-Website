@@ -9,14 +9,16 @@
     </nav>
 
     <div class="sl-pagebody">
-      <div class="row row-sm">
-        <div class="card pd-20 pd-sm-40">
-          <h6 class="card-body-title">Edit Product</h6>
+      <div class="row">
+        <div class="card">
+        <div class="card-header bg-primary text-white" >
+                <h2 class="card-body-title text-white pl-2" style="font-size:15px;">Edit Product</h2>
+              </div>
       <form action="{{ route('update-products')}}" method="POST" enctype="multipart/form-data">
       @csrf
 
       <input type="hidden" name="id" value="{{$products->id}}">
-          <div class="form-layout">
+          <div class="form-layout pd-10">
           
             <div class="row mg-b-25">
               <div class="col-lg-4">

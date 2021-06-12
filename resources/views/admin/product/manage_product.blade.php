@@ -11,26 +11,12 @@
     <div class="sl-pagebody">
       <div class="row row-sm">
         <div class="col-md-12">    
-              <div class="card pd-20 pd-sm-40">
-                <h6 class="card-body-title">Category Table</h6>    
-                @if(session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{session('success')}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      @endif
-
-                  @if(session('delete'))
-                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                  <strong>{{session('delete')}}</strong>
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    @endif
-                <div class="table-wrapper">
+              <div class="card">
+                <div class="card-header bg-primary text-white">
+                <h6 class="card-body-title text-white">Category List</h6>
+              </div>    
+               
+                <div class="table-wrapper  pd-10">
                   <table id="datatable1" class="table display responsive nowrap">
                     <thead>
                       <tr>
@@ -65,7 +51,7 @@
                         </td>
                         <td>
                             <a href="{{url('admin/product/edit/'.$row->id)}}" class="btn btn-sm btn-success"><i class="fa fa-pencil"></i></a>
-                            <a href="{{url('admin/product/delete/'.$row->id)}}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                            <a href="{{url('admin/product/delete/'.$row->id)}}" id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                             @if($row->status == 1)
                             <a href="{{url('admin/product/inactive/'.$row->id)}}" class="btn btn-sm btn-danger"><i class="fa fa-arrow-down"></i></a>
                             @else

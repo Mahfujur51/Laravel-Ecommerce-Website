@@ -44,6 +44,7 @@
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{asset('backend')}}/css/starlight.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
   </head>
 
   <body>
@@ -387,7 +388,64 @@
     <script src="{{asset('backend')}}/lib/datatables-responsive/dataTables.responsive.js"></script>
     <script src="{{asset('backend')}}/lib/select2/js/select2.min.js"></script>
 
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" ></script>
+    <script>
+        @if (Session::has('success'))
+        toastr.success("{{Session::get('success')}}")
+        {{-- expr --}}
+        @endif
+        @if (Session::has('warning'))
+        toastr.info("{{Session::get('info')}}")
+        {{-- expr --}}
+        @endif
+        @if (Session::has('error'))
+        toastr.error("{{Session::get('error')}}")
+        {{-- expr --}}
+        @endif
+    </script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous"></script>
 
+    <script>
+
+	$(document).on("click", "#delete", function(e){
+	   e.preventDefault();
+	   var link = $(this).attr("href");
+	    swal({
+		title: "Are You Sure Want to Delete?",
+	        text: "If you delete this, it will be gone forever.",
+            	icon: "warning",
+            	buttons: true,
+            	dangerMode: true,
+            })
+	    .then((willDelete) => {
+            if (willDelete) {
+            window.location.href = link;
+            } else{
+		swal("Safe Data!");
+	}
+
+    });
+});
+
+ $(document).on("click", "#accept", function(e){
+	   e.preventDefault();
+	   var link = $(this).attr("href");
+	    swal({
+		title: "Are You Sure Want to Accept?",
+	        text: "If you Accept this, it can't be Deleted.",
+            	icon: "warning",
+            	buttons: true,
+            	dangerMode: true,
+            })
+	    .then((willDelete) => {
+            if (willDelete) {
+            window.location.href = link;
+            }
+
+      });
+    });
+
+</script>
 
   </body>
 </html>
