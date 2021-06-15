@@ -72,6 +72,36 @@ Route::get('admin/coupon/delete/{coupon_id}', 'Admin\CouponController@Delete');
 Route::get('admin/coupon/inactive/{coupon_id}', 'Admin\CouponController@Inactive');
 Route::get('admin/coupon/active/{coupon_id}', 'Admin\CouponController@Active');
 
+//Banner
+Route::get('/add-banner', 'Admin\BannerController@index')->name('add.banner');
+Route::post('/banner-store', 'Admin\BannerController@store')->name('store.banner');
+Route::get('/manage-banner', 'Admin\BannerController@all')->name('manage.banner');
+Route::get('/banner-delete/{id}', 'Admin\BannerController@delete')->name('banner-delete');
+Route::get('/banner-edit/{id}', 'Admin\BannerController@Edit')->name('banner.edit');
+Route::post('/banner-update/{id}', 'Admin\BannerController@update')->name('banner.update');
+
+//Hero
+Route::get('/add-hero', 'Admin\HeroController@index')->name('hero.add');
+Route::get('/hero-delete/{id}', 'Admin\HeroController@delete');
+Route::get('/hero-edit/{id}', 'Admin\HeroController@Edit');
+Route::post('/hero-update/{id}', 'Admin\HeroController@Update')->name('hero.update');
+Route::post('/add-hero', 'Admin\HeroController@store')->name('store.hero');
+
+
+//Cart
+Route::post('/add/to-cart/{id}', 'CartController@addCart')->name('cart.add');
+Route::get('/cart-page', 'CartController@cartPage')->name('cart.page');
+Route::get('/delete-cart/{id}', 'CartController@cartDelete')->name('cart.delete');
+Route::post('/update-qty/{id}', 'CartController@qtyUpdate')->name('update.qty');
+Route::post('/cupon-apply', 'CartController@cuponApply')->name('cuppon.apply');
+
+
+//Wishlist
+
+Route::get('/wishlist-page', 'WishlistController@wishlistPage')->name('wishlist.page');
+
+
+
 
 
 

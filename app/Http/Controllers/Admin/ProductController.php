@@ -8,6 +8,7 @@ use App\Brand;
 use App\Category;
 use Carbon\Carbon;
 use App\Product;
+use App\Cart;
 use Image;
 
 class ProductController extends Controller
@@ -128,7 +129,14 @@ class ProductController extends Controller
                 'short_description' => $request->short_description,
                 'long_description' => $request->long_description,
                 'updated_at' => Carbon::now(),
+            ]); 
+            $cart=Cart::where('product_id',$request->id)->get();
+            foreach($cart as $carts){
+                $cart_id = $carts->id;
+            Cart::find($cart_id)->update([
+            'price'=>$request->price,
             ]);
+            }
 
             //return Redirect()->route('manage-products')->with('success','Product Data Updated Successfully.');
             Session::flash('success','Product Data Updated Successfully!');
@@ -266,6 +274,7 @@ class ProductController extends Controller
         unlink($image_three);
 
         Product::findOrFail($product_id)->delete();
+        Cart::where('product_id', $product_id)->delete();
 
         //return Redirect()->back()->with('delete', 'Brand Deleted Successfully');
 

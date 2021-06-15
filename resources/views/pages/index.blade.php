@@ -2,15 +2,61 @@
 
 @section('content')
 
+        <!-- Hero Section Begin -->
+        <section class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="hero__categories">
+                        <div class="hero__categories__all">
+                            <i class="fa fa-bars"></i>
+                            <span>All Category</span>
+                        </div>
 
-                    <div class="hero__item set-bg" data-setbg="{{asset('frontend')}}/img/hero/banner.jpg">
+                        @php
+                            $category = App\Category::where('status', 1)->latest()->get();
+                        @endphp
+
+                        <ul>
+                        @foreach($category as $row)
+                            <li><a href="#">{{$row->category_name}}</a></li>
+                        @endforeach
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="hero__search">
+                        <div class="hero__search__form">
+                            <form action="#">
+                                <div class="hero__search__categories">
+                                    All Categories
+                                    <span class="arrow_carrot-down"></span>
+                                </div>
+                                <input type="text" placeholder="What do yo u need?">
+                                <button type="submit" class="site-btn">SEARCH</button>
+                            </form>
+                        </div>
+                        <div class="hero__search__phone">
+                            <div class="hero__search__phone__icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="hero__search__phone__text">
+                                <h5>+65 11.188.888</h5>
+                                <span>support 24/7 time</span>
+                            </div>
+                        </div>
+                    </div>
+
+                        @foreach($banner as $ban)
+                    <div class="hero__item set-bg" data-setbg="{{asset($ban->image)}}">
                         <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
+                            <span>{{$ban->title}}</span>
+                            <h2>{{strip_tags($ban->small_description)}} <br>{{$ban->small_description2}}</h2>
+                            <p>{{strip_tags($ban->big_description)}}</p>
                             <a href="#" class="primary-btn">SHOP NOW</a>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -22,12 +68,17 @@
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
+                 @foreach($products as $row)
                     <div class="col-lg-3">
-                        <div class="categories__item set-bg" data-setbg="{{asset('frontend')}}/img/categories/cat-1.jpg">
-                            <h5><a href="#">Fresh Fruit</a></h5>
+                   
+                        <div class="categories__item set-bg" data-setbg="{{asset($row->image_one)}}">
+                            <h5><a href="#">{{$row->product_name}}</a></h5>
                         </div>
+ 
                     </div>
-                    <div class="col-lg-3">
+                @endforeach
+ 
+ <!--                   <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="{{asset('frontend')}}/img/categories/cat-2.jpg">
                             <h5><a href="#">Dried Fruit</a></h5>
                         </div>
@@ -47,6 +98,7 @@
                             <h5><a href="#">drink fruits</a></h5>
                         </div>
                     </div>
+                    -->
                 </div>
             </div>
         </div>
@@ -64,30 +116,54 @@
                     <div class="featured__controls">
                         <ul>
                             <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
+                            @foreach($categories as $cat)
+                            <li data-filter=".jony{{$cat->id}}">{{$cat->category_name}}</li>
+                            @endforeach
+                          <!--  
                             <li data-filter=".fresh-meat">Fresh Meat</li>
                             <li data-filter=".vegetables">Vegetables</li>
                             <li data-filter=".fastfood">Fastfood</li>
+                            -->
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="row featured__filter">
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                @foreach($categories as $cat)
+
+                    @php 
+                        $products = App\Product::where('category_id',$cat->id)->latest()->get();
+                    @endphp
+                    @foreach($products as $product)
+                <div class="col-lg-3 col-md-4 col-sm-6 mix jony{{$cat->id}}">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{{asset('frontend')}}/img/featured/feature-1.jpg">
+                        <div class="featured__item__pic set-bg" data-setbg="{{asset($product->image_one)}}">
+                            
+                        
                             <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li><a type="submit"><i class="fa fa-heart"></i></a></li>
+                                <li><a type="submit"><i class="fa fa-retweet"></i></a></li>
+
+                                <form action="{{url('add/to-cart/'.$product->id)}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                        
+                                        <input type="hidden" name="price" value="{{$product->price}}">
+                                        
+                                    <li><button type="submit" style="border-style:none !important; background-color:white; border-radius:50%; padding:10px"><i class="fa fa-shopping-cart"></i></button></li>
+                                </form>
+
                             </ul>
+                        
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="#">Crab Pool Security</a></h6>
-                            <h5>$30.00</h5>
+                            <h6><a href="#">{{$product->product_name}}</a></h6>
+                            <h5>${{$product->price}}</h5>
                         </div>
                     </div>
                 </div>
+                @endforeach
+                @endforeach
+           <!--     
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="{{asset('frontend')}}/img/featured/feature-2.jpg">
@@ -193,6 +269,7 @@
                         </div>
                     </div>
                 </div>
+            -->
             </div>
         </div>
     </section>
@@ -201,18 +278,17 @@
     <!-- Banner Begin -->
     <div class="banner">
         <div class="container">
+        
             <div class="row">
+        @foreach($hero as $heroes)
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="banner__pic">
-                        <img src="{{asset('frontend')}}/img/banner/banner-1.jpg" alt="">
+                        <img src="{{asset($heroes->image_one)}}" alt="">
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="banner__pic">
-                        <img src="{{asset('frontend')}}/img/banner/banner-2.jpg" alt="">
-                    </div>
-                </div>
+                @endforeach
             </div>
+            
         </div>
     </div>
     <!-- Banner End -->
@@ -226,15 +302,18 @@
                         <h4>Latest Products</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
+                            @foreach($latest_p as $latest)
                                 <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{asset('frontend')}}/img/latest-product/lp-1.jpg" alt="">
+                                    <div class="latest-product__item__pic"  style="width:35%">
+                                        <img src="{{asset($latest->image_one)}}" alt="" style="width:100%">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6>{{$latest->product_name}}</h6>
+                                        <span>${{$latest->price}}</span>
                                     </div>
                                 </a>
+                            @endforeach
+                               <!-- 
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{asset('frontend')}}/img/latest-product/lp-2.jpg" alt="">
@@ -253,17 +332,21 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
+                                -->
                             </div>
                             <div class="latest-prdouct__slider__item">
+                            @foreach($latest_p as $latest)
                                 <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{asset('frontend')}}/img/latest-product/lp-1.jpg" alt="">
+                                    <div class="latest-product__item__pic" style="width:35%">
+                                        <img src="{{asset($latest->image_one)}}" alt="" style="width:100%">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6>{{$latest->product_name}}</h6>
+                                        <span>${{$latest->price}}</span>
                                     </div>
                                 </a>
+                            @endforeach
+                            <!--
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{asset('frontend')}}/img/latest-product/lp-2.jpg" alt="">
@@ -282,6 +365,7 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
+                                -->
                             </div>
                         </div>
                     </div>
@@ -291,15 +375,18 @@
                         <h4>Top Rated Products</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
+                            @foreach($latest_p as $latest)
                                 <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{asset('frontend')}}/img/latest-product/lp-1.jpg" alt="">
+                                    <div class="latest-product__item__pic" style="width:35%">
+                                        <img src="{{asset($latest->image_one)}}" alt="" style="width:100%">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6>{{$latest->product_name}}</h6>
+                                        <span>${{$latest->price}}</span>
                                     </div>
                                 </a>
+                                @endforeach
+                                <!--
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{asset('frontend')}}/img/latest-product/lp-2.jpg" alt="">
@@ -318,36 +405,24 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
+                                -->
                             </div>
+                            
                             <div class="latest-prdouct__slider__item">
+                            @foreach($latest_p as $latest)
                                 <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{asset('frontend')}}/img/latest-product/lp-1.jpg" alt="">
+                                
+                                    <div class="latest-product__item__pic"  style="width:30%">
+                                        <img src="{{asset($latest->image_one)}}" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6>{{$latest->product_name}}</h6>
+                                        <span>${{$latest->price}}</span>
                                     </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{asset('frontend')}}/img/latest-product/lp-2.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{asset('frontend')}}/img/latest-product/lp-3.jpg" alt="">
-                                    </div>
-                                    <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
-                                    </div>
+                                    @endforeach
                                 </a>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -356,15 +431,18 @@
                         <h4>Review Products</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
+                            @foreach($latest_p as $latest)
                                 <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{asset('frontend')}}/img/latest-product/lp-1.jpg" alt="">
+                                    <div class="latest-product__item__pic" style="width:30%">
+                                        <img src="{{asset($latest->image_one)}}" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6>{{$latest->product_name}}</h6>
+                                        <span>${{$latest->price}}</span>
                                     </div>
                                 </a>
+                                @endforeach
+                            <!--
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{asset('frontend')}}/img/latest-product/lp-2.jpg" alt="">
@@ -383,17 +461,22 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
+                                -->
                             </div>
                             <div class="latest-prdouct__slider__item">
+                            @foreach($latest_p as $latest)
                                 <a href="#" class="latest-product__item">
-                                    <div class="latest-product__item__pic">
-                                        <img src="{{asset('frontend')}}/img/latest-product/lp-1.jpg" alt="">
+                                    <div class="latest-product__item__pic" style="width:30%">
+                                        <img src="{{asset($latest->image_one)}}" alt="">
                                     </div>
                                     <div class="latest-product__item__text">
-                                        <h6>Crab Pool Security</h6>
-                                        <span>$30.00</span>
+                                        <h6>{{$latest->product_name}}</h6>
+                                        <span>${{$latest->price}}</span>
                                     </div>
                                 </a>
+                                @endforeach
+
+                                <!--
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{asset('frontend')}}/img/latest-product/lp-2.jpg" alt="">
@@ -412,6 +495,7 @@
                                         <span>$30.00</span>
                                     </div>
                                 </a>
+                                -->
                             </div>
                         </div>
                     </div>

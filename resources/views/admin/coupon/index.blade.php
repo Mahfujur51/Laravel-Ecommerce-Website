@@ -22,6 +22,7 @@
                       <tr>
                         <th class="wd-15p">Sl</th>
                         <th class="wd-15p">Coupon Name</th>
+                        <th class="wd-15p">Discount</th>
                         <th class="wd-20p">Status</th>  
                         <th class="wd-25p">Action</th>
                       </tr>
@@ -34,6 +35,7 @@
                       <tr>
                         <td>{{ $i++ }}</td>
                         <td>{{ $coupon->coupon_name }}</td>
+                        <td>{{ $coupon->discount }}%</td>
                         <td>
                             @if($coupon->status == 1)
                             <span class="btn btn-success btn-sm"><i class="fa fa-arrow-up"></i> Active</span>
@@ -69,9 +71,18 @@
                         @csrf
                         <div class="form-group">
                           <label for="exampleInputEmail1">Add Coupon</label>
-                          <input type="text" name="coupon_name" class="form-control @error('brand_name') is-invalid @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Brand">
+                          <input type="text" name="coupon_name" class="form-control @error('coupon_name') is-invalid @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Brand">
 
                           @error('coupon_name')
+                            <span class="text-danger">{{$message}}</span>
+                          @enderror
+
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Discount</label>
+                          <input type="text" name="discount" class="form-control @error('discount') is-invalid @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Brand">
+
+                          @error('discount')
                             <span class="text-danger">{{$message}}</span>
                           @enderror
 

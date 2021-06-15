@@ -27,6 +27,7 @@ class CouponController extends Controller
             ]);
             Coupon::insert([
                 'coupon_name'=>$request->coupon_name,
+                'discount'=>$request->discount,
                 'created_at'=>Carbon::now()
             ]);
     
@@ -50,6 +51,7 @@ class CouponController extends Controller
         $coupon_id = $request->id;
         Coupon::find($coupon_id)->update([
             'coupon_name'=>$request->coupon_name,
+            'discount'=>$request->discount,
             'updated_at'=>Carbon::now()
         ]);
 

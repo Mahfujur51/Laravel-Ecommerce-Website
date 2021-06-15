@@ -16,14 +16,6 @@
                 </div>
 
                 <div class="card-body">
-                    @if(session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{session('success')}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      @endif
 
                     <form action="{{ route('update.coupon') }}" method="POST">
                         @csrf
@@ -33,6 +25,15 @@
                           <input type="text" name="coupon_name" class="form-control @error('coupon_name') is-invalid @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$coupon->coupon_name}}">
 
                           @error('coupon_name')
+                            <span class="text-danger">{{$message}}</span>
+                          @enderror
+
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Edit Coupon</label>
+                          <input type="text" name="discount" class="form-control @error('discount') is-invalid @enderror" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{$coupon->discount}}">
+
+                          @error('discount')
                             <span class="text-danger">{{$message}}</span>
                           @enderror
 

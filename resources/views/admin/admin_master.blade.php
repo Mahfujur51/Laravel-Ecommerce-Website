@@ -110,6 +110,24 @@
             <span class="menu-item-label">Coupon</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
+        <a href="{{ route('hero.add') }}"  class="sl-menu-link @yield('hero')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+            <span class="menu-item-label">Hero</span>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+
+        <a href="#" class="sl-menu-link @yield('banner')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <span class="menu-item-label">Banner</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{route('add.banner')}}" class="nav-link @yield('add-banner')">Add Banner</a></li>
+          <li class="nav-item"><a href="{{route('manage.banner')}} " class="nav-link @yield('manage-banner')">Manage Banner</a></li>
+        </ul>
         
       </div><!-- sl-sideleft-menu -->
 
