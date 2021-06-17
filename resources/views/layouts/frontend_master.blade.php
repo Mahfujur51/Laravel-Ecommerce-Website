@@ -176,9 +176,10 @@
                         $cart = App\Cart::all()->where('user_ip', request()->ip())->sum(function($c){
                             return $c->qty;
                         });
+                        $wishlist = App\Wishlist::where('user_id', Auth::id())->get();
                     @endphp
                         <ul>
-                            <li><a href="{{route('wishlist.page')}}"><i class="fa fa-heart"></i> <span>10</span></a></li>
+                            <li><a href="{{route('wishlist.page')}}"><i class="fa fa-heart"></i> <span>{{count($wishlist)}}</span></a></li>
                             <li><a href="{{route('cart.page')}}"><i class="fa fa-shopping-bag"></i> <span>{{$cart}}</span></a></li>
                         </ul>
                         <div class="header__cart__price">Total: <span>${{$total}}</span></div>

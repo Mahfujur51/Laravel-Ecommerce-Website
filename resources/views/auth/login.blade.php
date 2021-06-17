@@ -54,7 +54,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('User Login') }}</div>
+                <div class="card-header">{{ __('User Login') }} <span class="pull-right"><a href="{{route('register')}}" class="registration">Registration</a></span></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

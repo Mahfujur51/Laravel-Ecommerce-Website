@@ -136,6 +136,7 @@ class ProductController extends Controller
             Cart::find($cart_id)->update([
             'price'=>$request->price,
             ]);
+
             }
 
             //return Redirect()->route('manage-products')->with('success','Product Data Updated Successfully.');

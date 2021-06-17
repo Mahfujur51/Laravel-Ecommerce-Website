@@ -128,6 +128,14 @@
           <li class="nav-item"><a href="{{route('add.banner')}}" class="nav-link @yield('add-banner')">Add Banner</a></li>
           <li class="nav-item"><a href="{{route('manage.banner')}} " class="nav-link @yield('manage-banner')">Manage Banner</a></li>
         </ul>
+
+        <a href="{{route('admin.order')}}" class="sl-menu-link @yield('orders')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <span class="menu-item-label">Orders</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a>
         
       </div><!-- sl-sideleft-menu -->
 

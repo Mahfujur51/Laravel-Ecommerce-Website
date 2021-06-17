@@ -137,13 +137,20 @@
                     @foreach($products as $product)
                 <div class="col-lg-3 col-md-4 col-sm-6 mix jony{{$cat->id}}">
                     <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{{asset($product->image_one)}}">
+                        <div class="featured__item__pic set-bg" data-setbg="
+                        {{asset($product->image_one)}}">
+                            
                             
                         
                             <ul class="featured__item__pic__hover">
-                                <li><a type="submit"><i class="fa fa-heart"></i></a></li>
-                                <li><a type="submit"><i class="fa fa-retweet"></i></a></li>
 
+                            <!--Product add to wishlist-->    
+                                    <li><a href="{{url('add/to-wishlist/'.$product->id)}}" type="submit"><i class="fa fa-heart"></i></a>
+                                    </li>
+                                <!-- End Product add to wishlist-->
+
+                                <li><a type="submit"><i class="fa fa-retweet"></i></a></li>
+                                <!--Product add to Cart-->
                                 <form action="{{url('add/to-cart/'.$product->id)}}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                         
@@ -151,12 +158,13 @@
                                         
                                     <li><button type="submit" style="border-style:none !important; background-color:white; border-radius:50%; padding:10px"><i class="fa fa-shopping-cart"></i></button></li>
                                 </form>
+                                <!-- End Product add to Cart-->
 
                             </ul>
                         
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="#">{{$product->product_name}}</a></h6>
+                            <h6><a href="{{url('product/details/'.$product->id)}}">{{$product->product_name}}</a></h6>
                             <h5>${{$product->price}}</h5>
                         </div>
                     </div>

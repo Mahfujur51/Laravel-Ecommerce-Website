@@ -18,4 +18,11 @@ class FrontendController extends Controller
         $banner = Banner::latest()->get();
         return view('pages.index', compact('products', 'categories', 'banner','latest_p', 'hero'));
     }
+
+    public function productDetails($id){
+        $products = Product::findorFail($id);
+        $category_id = $products->category_id;
+        $related_product = Product::where('category_id', $category_id)->where('id','!=',$id)->latest()->get();
+        return view('product_details', compact('products', 'related_product'));
+    }
 }

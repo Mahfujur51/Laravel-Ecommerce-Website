@@ -39,12 +39,19 @@ class CartController extends Controller
     }
 
     public function qtyUpdate(Request $request, $id){
-        Cart::where('id', $id)->where('user_ip', request()->ip())->update([
+        if($request->qty < 1){
+            Session::flash('success','Product Quantity Is not Equal Zero!');
+        return redirect()->back();
+        }
+        else{
+            Cart::where('id', $id)->where('user_ip', request()->ip())->update([
             'qty'=>$request->qty,
         ]);
 
         Session::flash('success','Product Quantity Successfully Updated!');
         return redirect()->back();
+        }
+        
     }
 
     public function cuponApply(Request $request){
@@ -60,8 +67,15 @@ class CartController extends Controller
             Session::flash('success','Coupon Successfully Added!');
         return redirect()->back();
         }else{
-            Session::flush();
             Session::flash('success','Opps Sorry!| Invalid Coupon Code!');
+        return redirect()->back();
+        }
+    }
+
+    public function couponRemove(){
+        if(Session::has('coupon')){
+            session()->forget('coupon');
+            Session::flash('success','Coupon Remove Successfully!');
         return redirect()->back();
         }
     }

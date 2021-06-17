@@ -110,7 +110,9 @@ ol {
 /*---------------------
   Helper CSS
 -----------------------*/
-
+.registration:hover{
+	color:#000 !important; 
+}
 .section-title {
 	margin-bottom: 50px;
 	text-align: center;

@@ -88,21 +88,41 @@ Route::post('/hero-update/{id}', 'Admin\HeroController@Update')->name('hero.upda
 Route::post('/add-hero', 'Admin\HeroController@store')->name('store.hero');
 
 
+//Order
+Route::get('/admin.orders', 'Admin\OrderController@index')->name('admin.order');
+
+
+
+//Frontend Route=========================
+
 //Cart
 Route::post('/add/to-cart/{id}', 'CartController@addCart')->name('cart.add');
 Route::get('/cart-page', 'CartController@cartPage')->name('cart.page');
 Route::get('/delete-cart/{id}', 'CartController@cartDelete')->name('cart.delete');
 Route::post('/update-qty/{id}', 'CartController@qtyUpdate')->name('update.qty');
 Route::post('/cupon-apply', 'CartController@cuponApply')->name('cuppon.apply');
+Route::get('/coupon/remove', 'CartController@couponRemove');
 
 
 //Wishlist
 
 Route::get('/wishlist-page', 'WishlistController@wishlistPage')->name('wishlist.page');
+Route::get('/add/to-wishlist/{id}', 'WishlistController@addWishlist')->name('wishlist.add');
+Route::get('/delete-wishlist/{id}', 'WishlistController@wishlistDelete')->name('wishlist.delete');
+
+//Product Details
+
+Route::get('product/details/{id}', 'FrontendController@productDetails');
+
+//Chechout
+
+Route::get('/checkout', 'checkoutController@checkout');
 
 
+//Place order
 
-
+Route::post('/place-order', 'OrderController@placeOrder')->name('place.order');
+Route::get('/order/success', 'OrderController@orderSuccess')->name('order.success');
 
 
 

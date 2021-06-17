@@ -128,16 +128,6 @@
                 
                 <div class="col-lg-6">
                     @if(Session::has('coupon'))
-                    <div class="shoping__continue">
-                        <div class="shoping__discount">
-                            <h5>Discount Codes</h5>
-                            <form action="{{ url('cupon-apply')}}" method="post">
-                                @csrf
-                                <input type="text" name="cupon_name" placeholder="Enter your coupon code" value="You Get Discount {{$discount = session()->get('coupon')['coupon_discount']}}%">
-                                <button type="submit" class="site-btn">APPLY COUPON</button>
-                            </form>
-                        </div>
-                    </div>
                     @else
                     <div class="shoping__continue">
                         <div class="shoping__discount">
@@ -165,16 +155,19 @@
 
                     @if(Session::has('coupon'))
                     <li>Subtotal <span>${{$total}}</span></li>
+                    <li>Coupon Name <span>{{session()->get('coupon')['coupon_name']}} <a href="{{url('coupon/remove')}}" class="registration "><i class="fa fa-close"></i></a></span></li>
                     <li>Discount <span>{{$discount = session()->get('coupon')['coupon_discount']}}% = ({{($total * $discount)/100}}Tk)</span></li>
+                    <hr>
                     <li>Total <span>${{$total - ($total * $discount)/100}}</span></li>
                     @else
                     <li>Subtotal <span>${{$total}}</span></li>
+                    <hr>
                     <li>Total <span>${{$total}}</span></li>
                     @endif
                             
                             
                         </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a href="{{url('/checkout')}}" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>
