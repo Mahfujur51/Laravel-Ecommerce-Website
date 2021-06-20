@@ -41,7 +41,7 @@
                         <td>{{$order->subtotal}}</td>
                         <td>
                             @if($order->coupon_discount == NULL)
-                            No Coupon
+                            No Coupon Apply
                             @else
                             {{$order->coupon_discount}}%
                             @endif
@@ -49,7 +49,7 @@
                         <td>{{$order->total}}</td>
                         
                         <td>
-                            <a href="{{ url('admin/order/view/'.$order->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i> Edit</a>
+                            <a href="{{ url('admin/order/view/'.$order->id) }}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i> View</a>
                             <a href="{{ url('admin/order/vdeleteiew/'.$order->id) }}" id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
                         </td>
                       </tr>

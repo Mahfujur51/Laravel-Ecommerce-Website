@@ -105,6 +105,7 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                                
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
@@ -114,6 +115,9 @@
                             </div>
                         </div>
                     </form>
+                    <a href="{{url('/login/facebook')}}" class="btn btn-primary">
+                                    {{ __('Log in with Facebook') }}
+                                </a>
                 </div>
             </div>
         </div>

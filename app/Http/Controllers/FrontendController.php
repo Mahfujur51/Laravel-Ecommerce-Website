@@ -25,4 +25,22 @@ class FrontendController extends Controller
         $related_product = Product::where('category_id', $category_id)->where('id','!=',$id)->latest()->get();
         return view('product_details', compact('products', 'related_product'));
     }
+
+    //Shop Page
+
+    public function shop(){
+        $products = Product::where('status', 1)->latest()->paginate(6);
+        $latest_p = Product::where('status', 1)->inRandomOrder()->limit(3)->get();
+        $categories = Category::where('status', 1)->latest()->get();
+        return view('pages.shop', compact('products','latest_p', 'categories'));
+    }
+
+    //Category View
+
+    public function CategoryShow($id){
+        $category_product = Product::where('category_id', $id)->latest()->get();
+        $latest_p = Product::where('status', 1)->inRandomOrder()->limit(3)->get();
+        $categories = Category::where('status', 1)->latest()->get();
+        return view('pages.category_view', compact('category_product', 'latest_p', 'categories'));
+    }
 }

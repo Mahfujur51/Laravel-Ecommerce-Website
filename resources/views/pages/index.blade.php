@@ -53,7 +53,7 @@
                             <span>{{$ban->title}}</span>
                             <h2>{{strip_tags($ban->small_description)}} <br>{{$ban->small_description2}}</h2>
                             <p>{{strip_tags($ban->big_description)}}</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
+                            <a href="{{url('shop')}}" class="primary-btn">SHOP NOW</a>
                         </div>
                     </div>
                     @endforeach
@@ -72,7 +72,7 @@
                     <div class="col-lg-3">
                    
                         <div class="categories__item set-bg" data-setbg="{{asset($row->image_one)}}">
-                            <h5><a href="#">{{$row->product_name}}</a></h5>
+                            <h5><a href="{{url('product/details/'.$row->id)}}">{{$row->product_name}}</a></h5>
                         </div>
  
                     </div>
@@ -311,7 +311,7 @@
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
                             @foreach($latest_p as $latest)
-                                <a href="#" class="latest-product__item">
+                                <a href="{{url('product/details/'.$latest->id)}}" class="latest-product__item">
                                     <div class="latest-product__item__pic"  style="width:35%">
                                         <img src="{{asset($latest->image_one)}}" alt="" style="width:100%">
                                     </div>
@@ -344,7 +344,7 @@
                             </div>
                             <div class="latest-prdouct__slider__item">
                             @foreach($latest_p as $latest)
-                                <a href="#" class="latest-product__item">
+                                <a href="{{url('product/details/'.$latest->id)}}" class="latest-product__item">
                                     <div class="latest-product__item__pic" style="width:35%">
                                         <img src="{{asset($latest->image_one)}}" alt="" style="width:100%">
                                     </div>
@@ -384,7 +384,7 @@
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
                             @foreach($latest_p as $latest)
-                                <a href="#" class="latest-product__item">
+                                <a href="{{url('product/details/'.$latest->id)}}" class="latest-product__item">
                                     <div class="latest-product__item__pic" style="width:35%">
                                         <img src="{{asset($latest->image_one)}}" alt="" style="width:100%">
                                     </div>
@@ -418,7 +418,7 @@
                             
                             <div class="latest-prdouct__slider__item">
                             @foreach($latest_p as $latest)
-                                <a href="#" class="latest-product__item">
+                                <a href="{{url('product/details/'.$latest->id)}}" class="latest-product__item">
                                 
                                     <div class="latest-product__item__pic"  style="width:30%">
                                         <img src="{{asset($latest->image_one)}}" alt="">
@@ -440,7 +440,7 @@
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
                             @foreach($latest_p as $latest)
-                                <a href="#" class="latest-product__item">
+                                <a href="{{url('product/details/'.$latest->id)}}" class="latest-product__item">
                                     <div class="latest-product__item__pic" style="width:30%">
                                         <img src="{{asset($latest->image_one)}}" alt="">
                                     </div>
@@ -473,7 +473,7 @@
                             </div>
                             <div class="latest-prdouct__slider__item">
                             @foreach($latest_p as $latest)
-                                <a href="#" class="latest-product__item">
+                                <a href="{{url('product/details/'.$latest->id)}}" class="latest-product__item">
                                     <div class="latest-product__item__pic" style="width:30%">
                                         <img src="{{asset($latest->image_one)}}" alt="">
                                     </div>

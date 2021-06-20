@@ -120,20 +120,21 @@
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__language">
-                                <img src="{{asset('frontend')}}/img/language.png" alt="">
-                                <div>English</div>
-                                <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
-                                </ul>
+                                <div>
+                                    @auth 
+                                    
+                                @else
+                                     
+                                <a href="{{route('register')}}"><i class="fa fa-user"></i> Register</a>
+                                @endauth
+                                </div>
+                                
                             </div>
                             <div class="header__top__right__auth">
                                 @auth 
                                     <a href="{{route('login')}}"><i class="fa fa-user"></i> My Account</a>
                                 @else
-                                     <a href="{{route('login')}}"><i class="fa fa-user"></i> Login</a>
-                                <a href="{{route('register')}}"><i class="fa fa-user"></i> Register</a>
+                                <a href="{{route('login')}}"><i class="fa fa-user"></i> Login</a>
                                 @endauth
                             </div>
                         </div>
@@ -152,7 +153,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="{{url('/')}}">Home</a></li>
-                            <li><a href="./shop-grid.html">Shop</a></li>
+                            <li><a href="{{url('shop')}}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>

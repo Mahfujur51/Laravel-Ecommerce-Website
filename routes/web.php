@@ -30,6 +30,10 @@ Route::get('admin','Admin\LoginController@showLoginForm')->name('admin.login');
 Route::post('admin','Admin\LoginController@Login');
 Route::get('admin/logout','AdminController@Logout')->name('admin.logout');
 
+//Socialite Login
+
+Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 //========================Admin Route=====================
 
 //==================Category Section======================
@@ -90,6 +94,7 @@ Route::post('/add-hero', 'Admin\HeroController@store')->name('store.hero');
 
 //Order
 Route::get('/admin.orders', 'Admin\OrderController@index')->name('admin.order');
+Route::get('/admin/order/view/{id}', 'Admin\OrderController@view')->name('order.view');
 
 
 
@@ -103,6 +108,10 @@ Route::post('/update-qty/{id}', 'CartController@qtyUpdate')->name('update.qty');
 Route::post('/cupon-apply', 'CartController@cuponApply')->name('cuppon.apply');
 Route::get('/coupon/remove', 'CartController@couponRemove');
 
+//Shop Page Route
+
+Route::get('/shop', 'FrontendController@shop');
+Route::get('/category/{id}', 'FrontendController@CategoryShow');
 
 //Wishlist
 
@@ -124,7 +133,10 @@ Route::get('/checkout', 'checkoutController@checkout');
 Route::post('/place-order', 'OrderController@placeOrder')->name('place.order');
 Route::get('/order/success', 'OrderController@orderSuccess')->name('order.success');
 
+//User Order
 
+Route::get('/my-orders', 'UserController@MyOrder')->name('user.order');
+Route::get('/order-view/{id}', 'UserController@viewOrder');
 
 
 
