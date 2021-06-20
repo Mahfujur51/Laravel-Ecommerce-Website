@@ -206,7 +206,7 @@
                 <div class="col-lg-9 col-md-7">
                     
                     <div class="row">
-                        @foreach($category_product as $c_product)
+                        @forelse($category_product as $c_product)
                         
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
@@ -229,7 +229,9 @@
                                 </div>
                             </div>
                         </div>
-                        @endforeach
+                        @empty
+                        <h4 class="bg-success pt-2 pb-2 pl-5 pr-5 text-white">No Producucts Avaialbe in this Categore</h4>
+                        @endforelse
                         
                     </div>
                     
