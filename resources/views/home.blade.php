@@ -77,19 +77,18 @@
   <div class="col-sm-8">
     <div class="card">
         <div class="card-header bg-success text-white">
-                <h6 class="card-body-title text-white">Update Profile</h6>
+                <h6 class="card-body-title text-white"> Profile</h6>
               </div>
       <div class="card-body">
         <form>
             <div class="form-group">
                 <label for="exampleInputEmail1">Name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="{{Auth::user()->name}}">
+                <input type="text" disabled class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="{{Auth::user()->name}}">
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Emaile</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="{{Auth::user()->email}}">
+                <input type="email" disabled class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value="{{Auth::user()->email}}">
             </div>
-            <button type="submit" class="btn btn-success">Update</button>
         </form>
       </div>
     </div>

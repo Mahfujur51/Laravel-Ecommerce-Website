@@ -1,8 +1,9 @@
  <div class="card" style="width: 18rem;">
              <div class="card-header bg-success text-white">
-                <h6 class="card-body-title text-white">Order Items</h6>
+                <h6 class="card-body-title text-white" >Online Shop</h6>
               </div>
-        <img src="#" alt="Image" class="card-ing-top" style="border-radius:50%; height:100% !important; width:100% !important">
+              <br>
+        
   <ul class="list-group list-group-flush">
     <a href="{{url('/')}}" class="btn btn-sm btn-block btn-success"><i class="fa fa-home"></i>
     Home</a>
