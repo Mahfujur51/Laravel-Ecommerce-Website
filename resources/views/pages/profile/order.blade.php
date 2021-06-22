@@ -17,7 +17,7 @@
 
                         <ul>
                         @foreach($category as $row)
-                            <li><a href="#">{{$row->category_name}}</a></li>
+                            <li><a href="{{url('category/'.$row->id)}}">{{$row->category_name}}</a></li>
                         @endforeach
                         </ul>
                     </div>
@@ -25,12 +25,12 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
+                            <form action="{{route('search')}}" method="get">
                                 <div class="hero__search__categories">
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
                                 </div>
-                                <input type="text" placeholder="What do yo u need?">
+                                <input type="text" name="search" placeholder="What do yo u need?">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
@@ -89,6 +89,7 @@
                         <th class="wd-15p">Invoice No</th>  
                         <th class="wd-10p">Payment Type</th>  
                         <th class="wd-10p">Sub Total</th>  
+                        <th class="wd-10p">Discount</th>  
                         <th class="wd-10p">Total</th>
                         <th class="wd-10p">action</th>
                       </tr>
@@ -103,8 +104,10 @@
                         <td>#{{$order->invoice_no}}</td>
                         <td>{{$order->payment_type}}</td>
                         <td>{{$order->subtotal}}</td>
+                        <td>{{$order->subtotal - $order->total}}</td>
                         <td>{{$order->total}}</td>
-                        <td><a href="{{url('order-view/'.$order->id)}}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a></td>
+                        <td><a href="{{url('order-view/'.$order->id)}}" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+                        <a href="{{url('invoice/generate/'.$order->id)}}" class="btn btn-sm btn-success"><i class="fa fa-book"></i></a></td>
                       </tr>
                       @endforeach
                     </tbody>

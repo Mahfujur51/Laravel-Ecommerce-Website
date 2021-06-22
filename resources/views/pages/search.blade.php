@@ -33,6 +33,7 @@
                                 <input type="text" name="search" placeholder="What do yo u need?">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
+                        </div>
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
                                 <i class="fa fa-phone"></i>
@@ -55,10 +56,10 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>Shop Page</h2>
+                        <h2>Search Page</h2>
                         <div class="breadcrumb__option">
                             <a href="./index.html">Home</a>
-                            <span>Shopping Cart</span>
+                            <span>Search Page</span>
                         </div>
                     </div>
                 </div>
@@ -76,8 +77,9 @@
                         <div class="sidebar__item">
                             <h4>Department</h4>
                             
+
                         <ul>
-                        @foreach($categories as $row)
+                         @foreach($categories as $row)
                             <li><a href="{{url('category/'.$row->id)}}">{{$row->category_name}}</a></li>
                         @endforeach
                         </ul>
@@ -204,66 +206,38 @@
                 <div class="col-lg-9 col-md-7">
                     <div class="product__discount">
                         <div class="section-title product__discount__title">
-                            <h2>Sale Off</h2>
+                            <h2>Search By  "{{$search}}"</h2>
                         </div>
                         <div class="row">
-                            <div class="product__discount__slider owl-carousel">
-                                @foreach($products as $product)
-                                <div class="col-lg-4">
-                                    <div class="product__discount__item">
-                                        <div class="product__discount__item__pic set-bg"
-                                            data-setbg="{{asset($product->image_one)}}">
-                                            <div class="product__discount__percent">-20%</div>
-                                            <ul class="product__item__pic__hover">
-                                                <li><a href="{{url('add/to-wishlist/'.$product->id)}}"><i class="fa fa-heart"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <form action="{{url('add/to-cart/'.$product->id)}}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                        
-                                        <input type="hidden" name="price" value="{{$product->price}}">
-                                        
-                                    <li><button type="submit" style="border-style:none !important; background-color:white; border-radius:50%; padding:10px"><i class="fa fa-shopping-cart"></i></button></li>
-                                </form>
-                                            </ul>
-                                        </div>
-                                        <div class="product__discount__item__text">
-                                            <span>{{$product->category->category_name}}</span>
-                                            <h5><a href="{{url('product/details/'.$product->id)}}">{{$product->product_name}}</a></h5>
-                                            <div class="product__item__price">${{$product->price}} <span>$200</span></div>
-                                        </div>
+                            @forelse($products as $c_product)
+                            
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="{{asset($c_product->image_two)}}">
+                                        <ul class="product__item__pic__hover">
+                                            <li><a href="{{url('add/to-wishlist/'.$c_product->id)}}"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                            <form action="{{url('add/to-cart/'.$c_product->id)}}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                            
+                                            <input type="hidden" name="price" value="{{$c_product->price}}">
+                                            
+                                        <li><button type="submit" style="border-style:none !important; background-color:white; border-radius:50%; padding:10px"><i class="fa fa-shopping-cart"></i></button></li>
+                                    </form>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="{{url('product/details/'.$c_product->id)}}">{{$c_product->product_name}}</a></h6>
+                                        <h5>${{$c_product->price}}</h5>
                                     </div>
                                 </div>
-                                @endforeach
                             </div>
+                            @empty
+                            <h4 class="bg-success pt-2 pb-2 pl-5 pr-5 text-white">No Result Found !! Please Try Another Word</h4>
+                            @endforelse
+                            
                         </div>
                     </div>
-                    <div class="row">
-                        @foreach($products as $product)
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{asset($product->image_two)}}">
-                                    <ul class="product__item__pic__hover">
-                                        <li><a href="{{url('add/to-wishlist/'.$product->id)}}"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                        <form action="{{url('add/to-cart/'.$product->id)}}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                        
-                                        <input type="hidden" name="price" value="{{$product->price}}">
-                                        
-                                    <li><button type="submit" style="border-style:none !important; background-color:white; border-radius:50%; padding:10px"><i class="fa fa-shopping-cart"></i></button></li>
-                                </form>
-                                    </ul>
-                                </div>
-                                <div class="product__item__text">
-                                    <h6><a href="{{url('product/details/'.$product->id)}}">{{$product->product_name}}</a></h6>
-                                    <h5>${{$product->price}}</h5>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                        
-                    </div>
-                        <span >{{$products->links()}}</span>
                 </div>
             </div>
         </div>
