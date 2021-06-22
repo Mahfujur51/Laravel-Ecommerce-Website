@@ -51,11 +51,10 @@ class CartController extends Controller
         Session::flash('success','Product Quantity Successfully Updated!');
         return redirect()->back();
         }
-        
+
     }
 
     public function cuponApply(Request $request){
-        //dd($request->all());
 
         $check = Coupon::where('coupon_name', $request->cupon_name)->first();
 
@@ -79,7 +78,4 @@ class CartController extends Controller
         return redirect()->back();
         }
     }
-
-
-
 }

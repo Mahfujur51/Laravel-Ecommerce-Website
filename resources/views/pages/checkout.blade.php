@@ -17,7 +17,7 @@
 
                         <ul>
                         @foreach($category as $row)
-                            <li><a href="#">{{$row->category_name}}</a></li>
+                            <li><a href="{{url('/category/'.$row->id)}}">{{$row->category_name}}</a></li>
                         @endforeach
                         </ul>
                     </div>
@@ -152,10 +152,10 @@
                             @error('shipping_address')
                                     <span class="text-danger">{{$message}}</span>
                             @enderror
-                            
-                            
-                            
-                           
+
+
+
+
                         </div>
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
@@ -166,7 +166,7 @@
                                     <li>{{$carts->product->product_name}} ({{$carts->qty}}) <span>${{$carts->price * $carts->qty}}</span></li>
                                     @endforeach
 
-                                    @php 
+                                    @php
                                         $total = App\Cart::all()->where('user_ip', request()->ip())->sum(function($t){
                                             return $t->price * $t->qty;
                                         });
@@ -195,9 +195,9 @@
                                     <span class="text-danger">{{$message}}</span>
                             @enderror
                                         <span class="checkmark"></span>
-                                        
+
                                     </label>
-                                    
+
                                 </div>
 
                                 <div class="checkout__input__checkbox">
@@ -208,11 +208,11 @@
                                     <span class="text-danger">{{$message}}</span>
                             @enderror
                                         <span class="checkmark"></span>
-                                        
+
                                     </label>
-                                    
+
                                 </div>
-                                
+
                                 <button type="submit" class="site-btn">PLACE ORDER</button>
                             </div>
                         </div>

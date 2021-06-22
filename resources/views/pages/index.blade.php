@@ -19,7 +19,7 @@
 
                         <ul>
                         @foreach($category as $row)
-                            <li><a href="#">{{$row->category_name}}</a></li>
+                            <li><a href="{{url('/category/'.$row->id)}}">{{$row->category_name}}</a></li>
                         @endforeach
                         </ul>
                     </div>
@@ -70,14 +70,14 @@
                 <div class="categories__slider owl-carousel">
                  @foreach($products as $row)
                     <div class="col-lg-3">
-                   
+
                         <div class="categories__item set-bg" data-setbg="{{asset($row->image_one)}}">
                             <h5><a href="{{url('product/details/'.$row->id)}}">{{$row->product_name}}</a></h5>
                         </div>
- 
+
                     </div>
                 @endforeach
- 
+
  <!--                   <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="{{asset('frontend')}}/img/categories/cat-2.jpg">
                             <h5><a href="#">Dried Fruit</a></h5>
@@ -119,7 +119,7 @@
                             @foreach($categories as $cat)
                             <li data-filter=".jony{{$cat->id}}">{{$cat->category_name}}</li>
                             @endforeach
-                          <!--  
+                          <!--
                             <li data-filter=".fresh-meat">Fresh Meat</li>
                             <li data-filter=".vegetables">Vegetables</li>
                             <li data-filter=".fastfood">Fastfood</li>
@@ -131,7 +131,7 @@
             <div class="row featured__filter">
                 @foreach($categories as $cat)
 
-                    @php 
+                    @php
                         $products = App\Product::where('category_id',$cat->id)->latest()->get();
                     @endphp
                     @foreach($products as $product)
@@ -139,12 +139,12 @@
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="
                         {{asset($product->image_one)}}">
-                            
-                            
-                        
+
+
+
                             <ul class="featured__item__pic__hover">
 
-                            <!--Product add to wishlist-->    
+                            <!--Product add to wishlist-->
                                     <li><a href="{{url('add/to-wishlist/'.$product->id)}}" type="submit"><i class="fa fa-heart"></i></a>
                                     </li>
                                 <!-- End Product add to wishlist-->
@@ -153,15 +153,15 @@
                                 <!--Product add to Cart-->
                                 <form action="{{url('add/to-cart/'.$product->id)}}" method="POST" enctype="multipart/form-data">
                                     @csrf
-                                        
+
                                         <input type="hidden" name="price" value="{{$product->price}}">
-                                        
+
                                     <li><button type="submit" style="border-style:none !important; background-color:white; border-radius:50%; padding:10px"><i class="fa fa-shopping-cart"></i></button></li>
                                 </form>
                                 <!-- End Product add to Cart-->
 
                             </ul>
-                        
+
                         </div>
                         <div class="featured__item__text">
                             <h6><a href="{{url('product/details/'.$product->id)}}">{{$product->product_name}}</a></h6>
@@ -171,7 +171,7 @@
                 </div>
                 @endforeach
                 @endforeach
-           <!--     
+           <!--
                 <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="{{asset('frontend')}}/img/featured/feature-2.jpg">
@@ -286,7 +286,7 @@
     <!-- Banner Begin -->
     <div class="banner">
         <div class="container">
-        
+
             <div class="row">
         @foreach($hero as $heroes)
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -296,7 +296,7 @@
                 </div>
                 @endforeach
             </div>
-            
+
         </div>
     </div>
     <!-- Banner End -->
@@ -321,7 +321,7 @@
                                     </div>
                                 </a>
                             @endforeach
-                               <!-- 
+                               <!--
                                 <a href="#" class="latest-product__item">
                                     <div class="latest-product__item__pic">
                                         <img src="{{asset('frontend')}}/img/latest-product/lp-2.jpg" alt="">
@@ -415,11 +415,11 @@
                                 </a>
                                 -->
                             </div>
-                            
+
                             <div class="latest-prdouct__slider__item">
                             @foreach($latest_p as $latest)
                                 <a href="{{url('product/details/'.$latest->id)}}" class="latest-product__item">
-                                
+
                                     <div class="latest-product__item__pic"  style="width:30%">
                                         <img src="{{asset($latest->image_one)}}" alt="">
                                     </div>
@@ -430,7 +430,7 @@
                                     @endforeach
                                 </a>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>

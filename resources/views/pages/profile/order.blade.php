@@ -17,7 +17,7 @@
 
                         <ul>
                         @foreach($category as $row)
-                            <li><a href="#">{{$row->category_name}}</a></li>
+                            <li><a href="{{url('/category/'.$row->id)}}">{{$row->category_name}}</a></li>
                         @endforeach
                         </ul>
                     </div>
@@ -75,20 +75,20 @@
   <div class="col-sm-8">
     <div class="sl-pagebody">
       <div class="row row-sm">
-        <div class="col-md-12">    
+        <div class="col-md-12">
               <div class="card">
                 <div class="card-header bg-primary text-white">
                 <h6 class="card-body-title text-white">My Order List</h6>
-              </div>    
-               
+              </div>
+
                 <div class="table-wrapper  pd-10">
                   <table id="datatable1" class="table display responsive nowrap">
                     <thead>
                       <tr>
                         <th class="wd-5p">Sl</th>
-                        <th class="wd-15p">Invoice No</th>  
-                        <th class="wd-10p">Payment Type</th>  
-                        <th class="wd-10p">Sub Total</th>  
+                        <th class="wd-15p">Invoice No</th>
+                        <th class="wd-10p">Payment Type</th>
+                        <th class="wd-10p">Sub Total</th>
                         <th class="wd-10p">Total</th>
                         <th class="wd-10p">action</th>
                       </tr>

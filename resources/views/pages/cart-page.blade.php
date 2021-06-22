@@ -17,7 +17,7 @@
 
                         <ul>
                         @foreach($category as $row)
-                            <li><a href="#">{{$row->category_name}}</a></li>
+                            <li><a href="{{url('/category/'.$row->id)}}">{{$row->category_name}}</a></li>
                         @endforeach
                         </ul>
                     </div>
@@ -58,7 +58,7 @@
                     <div class="breadcrumb__text">
                         <h2>Shopping Cart</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
+                            <a href="{{url('/')}}">Home</a>
                             <span>Shopping Cart</span>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                                                 <div class="pro-qty">
                                                     <input type="text" name="qty" value="{{$carts->qty}}">
                                                 </div>
-                                                <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check-circle"></i> Update</button> 
+                                                <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-check-circle"></i> Update</button>
                                             </div>
                                         </form>
                                     </td>
@@ -109,7 +109,7 @@
                                         ${{$carts->price * $carts->qty}}
                                     </td>
                                     <td class="shoping__cart__item__close">
-                                        
+
                                         <a href="{{url('delete-cart/'.$carts->id)}}" id="delete" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
                                     </td>
                                 </tr>
@@ -125,7 +125,7 @@
                         <a href="{{url('/')}}" class="btn btn-success"><i class="fa fa-shopping-cart"></i> Continue Shopping</a>
                     </div>
                 </div>
-                
+
                 <div class="col-lg-6">
                     @if(Session::has('coupon'))
                     @else
@@ -146,7 +146,7 @@
                         <h5>Cart Total</h5>
                         <ul>
                         <!--Total-->
-                        @php 
+                        @php
                         $total = App\Cart::all()->where('user_ip', request()->ip())->sum(function($t){
                             return $t->price * $t->qty;
                         });
@@ -164,8 +164,8 @@
                     <hr>
                     <li>Total <span>${{$total}}</span></li>
                     @endif
-                            
-                            
+
+
                         </ul>
                         <a href="{{url('/checkout')}}" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>

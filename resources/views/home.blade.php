@@ -17,7 +17,7 @@
 
                         <ul>
                         @foreach($category as $row)
-                            <li><a href="#">{{$row->category_name}}</a></li>
+                            <li><a href="{{url('/category/'.$row->id)}}">{{$row->category_name}}</a></li>
                         @endforeach
                         </ul>
                     </div>
@@ -72,7 +72,7 @@
   <div class="col-sm-4">
 
    @include('pages.profile.inc.sidebar')
-   
+
   </div>
   <div class="col-sm-8">
     <div class="card">

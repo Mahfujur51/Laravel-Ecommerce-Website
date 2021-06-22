@@ -59,7 +59,29 @@ class OrderController extends Controller
                 'shipping_address' => $request->shipping_address,
                 'shipping_state' => $request->shipping_state,
                 'post_code' => $request->post_code,
-                'created_at' => Carbon::now(),
+                'created_at' => Carbon::now()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
             ]);
 
             if(Session::has('coupon')){
