@@ -5,6 +5,7 @@ use App\Order;
 use App\OrderItem;
 use App\Shipping;
 use Auth;
+use PDF;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -19,5 +20,15 @@ class UserController extends Controller
         $orderitems = OrderItem::where('order_id', $id)->get();
         $shipping = Shipping::where('order_id', $id)->first();
         return view('pages.profile.view_order', compact('order', 'orderitems', 'shipping'));
+    }
+
+
+    public function invoice($id){
+        $order = Order::findorFail($id);
+        $orderitems = OrderItem::with('product')->where('order_id', $id)->get();
+        $shipping = Shipping::where('order_id', $id)->first();
+        $pdf = PDF::loadView('invoice', compact('order', 'orderitems', 'shipping'));
+        return $pdf->stream('invoice.pdf');
+        
     }
 }

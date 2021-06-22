@@ -17,7 +17,7 @@
 
                         <ul>
                         @foreach($category as $row)
-                            <li><a href="#">{{$row->category_name}}</a></li>
+                            <li><a href="{{url('category/'.$row->id)}}">{{$row->category_name}}</a></li>
                         @endforeach
                         </ul>
                     </div>
@@ -25,12 +25,12 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
+                            <form action="{{route('search')}}" method="get">
                                 <div class="hero__search__categories">
                                     All Categories
                                     <span class="arrow_carrot-down"></span>
                                 </div>
-                                <input type="text" placeholder="What do yo u need?">
+                                <input type="text" name="search" placeholder="What do yo u need?">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
                         </div>
@@ -148,7 +148,7 @@
                             </div>
                         </div>
                         @empty
-                        <h4 class="bg-success pt-2 pb-2 pl-5 pr-5 text-white">No Producucts Avaialbe in this Categore</h4>
+                        <h4 class="bg-success pt-2 pb-2 pl-5 pr-5 text-white">No Producucts Avaialbe in this Category</h4>
                         @endforelse
 
                     </div>

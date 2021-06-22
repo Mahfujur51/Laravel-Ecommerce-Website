@@ -122,6 +122,7 @@ Route::get('/delete-wishlist/{id}', 'WishlistController@wishlistDelete')->name('
 //Product Details
 
 Route::get('product/details/{id}', 'FrontendController@productDetails');
+Route::get('/search', 'FrontendController@search')->name('search');
 
 //Chechout
 
@@ -137,6 +138,7 @@ Route::get('/order/success', 'OrderController@orderSuccess')->name('order.succes
 
 Route::get('/my-orders', 'UserController@MyOrder')->name('user.order');
 Route::get('/order-view/{id}', 'UserController@viewOrder');
+Route::get('/invoice/generate/{id}', 'UserController@invoice');
 
 
 

@@ -43,4 +43,18 @@ class FrontendController extends Controller
         $categories = Category::where('status', 1)->latest()->get();
         return view('pages.category_view', compact('category_product', 'latest_p', 'categories'));
     }
+
+    public function search(Request $request){
+        $search = $request->search;
+        
+        $products = Product::where('product_name', 'like', '%'.$search.'%')
+                             ->orwhere('product_slug', 'like', '%'.$search.'%')
+                             ->orwhere('product_code', 'like', '%'.$search.'%')
+                             ->orwhere('short_description', 'like', '%'.$search.'%')
+                             ->orwhere('long_description', 'like', '%'.$search.'%')
+                             ->orwhere('price', 'like', '%'.$search.'%')->get();
+        $latest_p = Product::where('status', 1)->inRandomOrder()->limit(3)->get();
+        $categories = Category::where('status', 1)->latest()->get();
+        return view('pages.search', compact('products','latest_p', 'categories', 'search'));
+    }
 }
