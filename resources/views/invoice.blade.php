@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Invoice </title>
   </head>
   <body>
   <h3 class="text-center">Invoice #{{$order->invoice_no}}</h3>
@@ -29,7 +29,13 @@
                         <td>#{{$order->invoice_no}}</td>
                         <td>{{$order->payment_type}}</td>
                         <td>{{$order->subtotal}}</td>
-                        <td>{{$order->subtotal - $order->total}}</td>
+                        <td>
+                        @if($order->coupon_discount == NULL)
+                            No Discount
+                        @else
+                            {{$order->subtotal - $order->total}}
+                        @endif
+                        </td>
                         <td>{{$order->total}}</td>
                       </tr>
                     </tbody>

@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function invoice($id){
         $order = Order::findorFail($id);
-        $orderitems = OrderItem::where('order_id', $id)->first();
+        $orderitems = OrderItem::with('product')->where('order_id', $id)->get();
         $shipping = Shipping::where('order_id', $id)->first();
         $pdf = PDF::loadView('invoice', compact('order', 'orderitems', 'shipping'));
         return $pdf->stream('invoice.pdf');
